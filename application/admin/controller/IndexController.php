@@ -22,4 +22,16 @@ class IndexController extends Controller
     {
         return $this->fetch('index');
     }
+    public function top($id=0)
+    {
+        return $this->fetch('top');
+    }
+    public function left($id=0)
+    {
+        return $this->fetch('left');
+    }
+    public function main($id=0)
+    {
+        return $this->fetch('main');
+    }
 }

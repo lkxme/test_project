@@ -22,8 +22,17 @@
 */
 
 use think\Route;
-Route::get('index','admin/index/index');
+Route::get('/','admin/index/index');
 
-Route::get('login','admin/index/login');
-Route::get('user','admin/index/user');
-Route::get('logout','admin/index/logout');
+Route::get('top','admin/index/top');
+Route::get('left','admin/index/left');
+Route::get('main','admin/index/main');
+
+
+//定义后台登录界面
+Route::post( 'login','admin/public/login');
+Route::get( 'login','admin/public/login');
+
+//test测试
+Route::get( 'test','admin/test/test');
+Route::get( 'test1','admin/test/test2');
