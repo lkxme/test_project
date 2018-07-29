@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <link href="{:config('admin_static')}/css/style.css" rel="stylesheet" type="text/css" />
+    <script language="JavaScript" src="{:config('admin_static')}/js/jquery.js"></script>
+
+    <script src="/static/plugins/ueditor/ueditor.config.js"></script>
+    <script src="/static/plugins/ueditor/ueditor.all.js"></script>
+    <script src="/static/plugins/placeImage.js"></script>
+    <style>
+        .active{
+            border-bottom: solid 3px #66c9f3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">表单</a></li>
+        </ul>
+    </div>
+    <div class="formbody">
+        <div class="formtitle">
+            <span class="active">基本信息</span>
+
+        </div>
+        <form action="{:url('admin/article/upd')}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="article_id" value="{$art['article_id']}">
+            <ul class="forminfo">
+                <li>
+                    <label>文章标题</label>
+                    <input name="title" value="{$art['title']}" placeholder="请输入商品名称" type="text" class="dfinput" /><i>名称不能超过30个字符</i>
+                </li>
+                <li>
+                    <label>父分类</label>
+                    <select name="cat_id" class="dfinput">
+                        <option value="">请选择分类</option>
+
+                        {foreach name='cats' item='cat'}
+                        <option value="{$cat['cat_id']}">{:str_repeat('&nbsp;',$cat['level']*2)}{$cat['cat_name']}</option>
+                        {/foreach}
+                    </select>
+                </li>
+                 <li>
+                    <label>文章图片</label>
+                    <input name="img" id="f" type="file" class="" onchange="change()"/>
+                    <p>
+                        <img id="preview" alt="" width="200px" name="pic" />
+                    </p>
+                </li>
+                <li>
+                    <label>文章内容</label>
+                    <br/>
+                    <br/>
+                    <br/>
+                   <!--  <textarea name="content" placeholder="请输入商品名称"  class="dfinput" id="container" ></textarea> -->
+                    <script id="container" name="content" type="text/plain">{$art['content']}</script>
+                </li>
+            </ul>
+            <li>
+                    <label>&nbsp;</label>
+                    <input name="" id="btnSubmit" type="submit" class="btn" value="确认添加" />
+             </li>
+        </form>
+    </div>
+
+</body>
+    <script >
+        //文章默认所属分类,默认被选中
+        $("select[name='cat_id']").val("{$art['cat_id']}");
+        $(document).ready(function(){
+            var ue = UE.getEditor('container');
+        //     ue.ready(function() {
+        //     //设置编辑器的内容
+        //     ue.setContent('hello');
+        //     //获取html内容，返回: <p>hello</p>
+        //     var html = ue.getContent();
+        //     //获取纯文本内容，返回: hello
+        //     var txt = ue.getContentTxt();
+        // });
+      });
+    </script>
+
+</html>
